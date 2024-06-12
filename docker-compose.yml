@@ -1,0 +1,16 @@
+services:
+  app:
+    build: .
+    command: bash -c "rm -f /usr/src/app/tmp/pids/server.pid && (bundle check || bundle install) && ./bin/dev"
+    stdin_open: true
+    tty: true
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/usr/src/app
+      - gems:/gems
+
+
+volumes:
+  postgres:
+  gems:
