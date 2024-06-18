@@ -30,10 +30,16 @@
 
     <div class="my-5">
       <%= form.label :weight_class %>
-      <%= form.text_field :weight_class,
-        class: "form-item",
-        'data-fighters-form-target': 'weightClass',
-        'data-action': 'input->fighters-form#validatesRequiredFields' # <- declaração da ação de callback.
+      <%= form.select :weight_class,
+        options_for_select(
+          Fighter.weight_classes.keys.map { |weight_class| [weight_class.humanize, weight_class] }
+        ),
+        { include_blank: true },
+        {
+          class: "form-item",
+          'data-fighters-form-target': 'weightClass',
+          'data-action': 'change->fighters-form#validatesRequiredFields' # <- declaração da ação de callback.
+        }
       %>
     </div>
 
