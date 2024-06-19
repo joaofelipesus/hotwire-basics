@@ -1,0 +1,13 @@
+<div id="fighters_list" class="grid grid-cols-4 gap-4 px-3">
+  <% fighters.each do |fighter| %>
+    <div id="fighter_card" class="bg-white px-6 py-4 rounded-lg shadow-xl bg-white border-solid border-2 gap-6 w-100">
+      <h3 class="text-xl text-secondary-dark font-bold">
+          <%= fighter.name %>
+      </h3>
+      <section class="flex flex-col pl-4">
+        <span class="text-gray-400">Cartel: <%= fighter.fight_record %></span>
+        <span class="text-gray-400">Weight class: <%= fighter.weight_class %></span>
+      </section>
+    </div>
+  <% end %>
+</div>

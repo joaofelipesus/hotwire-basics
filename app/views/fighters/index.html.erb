@@ -5,17 +5,30 @@
 
   <% content_for :title, "Fighters" %>
 
-  <div class="flex justify-between items-center">
+  <div class="flex justify-between items-center mb-8">
     <h1 class="font-bold text-4xl">Fighters</h1>
     <%= link_to "New fighter", new_fighter_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
 
-  <div id="fighters" class="min-w-full">
-    <% @fighters.each do |fighter| %>
-      <%= render fighter %>
-      <p>
-        <%= link_to "Show this fighter", fighter, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-      </p>
+  <div class="mb-4" data-controller="fighters-search">
+    <%= form_tag(
+        search_fighters_path,
+        method: :get,
+        'data-fighters-search-target': 'searchForm'
+      ) do %>
+      <div>
+        <%= text_field_tag :query,
+          params[:query],
+          placeholder: "Search fighter by name",
+          class: "form-item",
+          'data-action': 'fighters-search#search'
+        %>
+      </div>
     <% end %>
   </div>
+
+  <%=
+    render partial: "fighters/fighters_list",
+    locals: { fighters: @fighters }
+  %>
 </div>

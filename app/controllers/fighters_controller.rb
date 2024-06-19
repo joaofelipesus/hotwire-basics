@@ -6,6 +6,16 @@ class FightersController < ApplicationController
     @fighters = Fighter.all
   end
 
+  def search
+    @fighters = Fighter.where("name LIKE ?", "%#{params[:query]}%").order(:name)
+
+    render turbo_stream: turbo_stream.replace(
+      'fighters_list',
+      partial: 'fighters/fighters_list',
+      locals: { fighters: @fighters }
+    )
+  end
+
   # GET /fighters/1 or /fighters/1.json
   def show
   end
