@@ -3,7 +3,7 @@ class FightersController < ApplicationController
 
   # GET /fighters or /fighters.json
   def index
-    @fighters = Fighter.all
+    @fighters = Fighter.order(name: :asc)
   end
 
   def search
